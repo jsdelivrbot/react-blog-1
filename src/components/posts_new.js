@@ -76,17 +76,11 @@ class PostsNew extends Component {
 function validate(values) {
   const errors = {};
 
-  if (!values.title) {
-    errors.title = 'Enter a username';
-  }
-
-  if(!values.categories) {
-    errors.categories = 'Enter categories';
-  }
-
-  if(!values.content) {
-    errors.content = 'Enter some content';
-  }
+  _.each(FIELDS, (type, field) => {
+    if(!values[field]) {
+      errors[field] = `Enter a ${field}`;
+    }
+  });
 
   return errors;
 }

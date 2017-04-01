@@ -1,7 +1,23 @@
+import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import { createPost } from '../actions/index';
 import { Link } from 'react-router';
+
+const FIELDS = {
+  title: {
+    type: 'input',
+    label: 'Title for Post'
+  },
+  categories: {
+    type: 'input',
+    label: 'Enter some categories for this post'
+  },
+  content: {
+    type: 'textarea',
+    label: 'Post Contents'
+  }
+};
 
 class PostsNew extends Component {
 
@@ -79,6 +95,6 @@ function validate(values) {
 // reduxForm: 1st is form config, 2nd is mapStateToProps, 3rd is mapDispatchToProps
 export default reduxForm({
   form: 'PostsNewForm',
-  fields: ['title', 'categories', 'content'],
+  fields: _.keys(FIELDS),
   validate
 }, null, { createPost })(PostsNew);
